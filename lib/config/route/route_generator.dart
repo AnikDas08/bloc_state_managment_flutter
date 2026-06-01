@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../features/auth/sign_in/presentation/page/signin_screen.dart';
-import '../../features/auth/sign_in_cubit/presentation/page/signin_cubit_screen.dart';
-import '../../features/auth/sign_up/presentation/page/signup_screen.dart';
-import '../../features/auth/sign_up_cubit/presentation/page/signup_cubit_screen.dart';
-import '../../features/auth/compl_profile/presentation/page/complete_profile_screen.dart';
+import '../../features/auth/presentation/compl_profile/screen/complete_profile_screen.dart';
+import '../../features/auth/presentation/sign_in/screen/signin_screen.dart';
+import '../../features/auth/presentation/sign_in_cubit/screen/signin_cubit_screen.dart';
+import '../../features/auth/presentation/sign_up/screen/signup_screen.dart';
+import '../../features/auth/presentation/sign_up_cubit/screen/signup_cubit_screen.dart';
 import 'app_routes.dart';
 
 class RouteGenerator {

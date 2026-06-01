@@ -1,12 +1,12 @@
 import 'package:get_it/get_it.dart';
-import '../../features/auth/sign_in/data/data_source/data_source.dart';
-import '../../features/auth/sign_in/data/repsository/auth_repositoryy_impl.dart';
-import '../../features/auth/sign_in/domain/repository/auth_repository.dart';
-import '../../features/auth/sign_in/presentation/bloc/signin_bloc.dart';
-import '../../features/auth/sign_in_cubit/presentation/cubit/signin_cubit.dart';
-import '../../features/auth/sign_up/presentation/bloc/signup_bloc.dart';
-import '../../features/auth/sign_up_cubit/presentation/cubit/signup_cubit.dart';
-import '../../features/auth/compl_profile/presentation/bloc/complete_profile_bloc.dart';
+import '../../features/auth/data/data_source/auth_remote_data_source.dart';
+import '../../features/auth/data/repository/auth_repository_impl.dart';
+import '../../features/auth/domain/repository/auth_repository.dart';
+import '../../features/auth/presentation/sign_in/bloc/signin_bloc.dart';
+import '../../features/auth/presentation/sign_in_cubit/cubit/signin_cubit.dart';
+import '../../features/auth/presentation/sign_up/bloc/signup_bloc.dart';
+import '../../features/auth/presentation/sign_up_cubit/cubit/signup_cubit.dart';
+import '../../features/auth/presentation/compl_profile/bloc/complete_profile_bloc.dart';
 import '../../features/counter/data/counter_repository.dart';
 import '../../features/counter/bloc/counter_bloc.dart';
 
