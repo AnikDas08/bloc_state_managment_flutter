@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entity/user_entity.dart';
@@ -11,7 +12,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
   SignInBloc({required AuthRepository authRepository})
       : _authRepository = authRepository,
-        super(SignInInitial()) {
+        super(const SignInInitial()) {
     on<SignInSubmitted>(_onSignInSubmitted);
   }
 

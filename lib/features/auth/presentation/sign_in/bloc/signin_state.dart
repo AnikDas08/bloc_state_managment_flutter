@@ -1,18 +1,32 @@
 part of 'signin_bloc.dart';
 
-@immutable
-abstract class SignInState {}
+abstract class SignInState extends Equatable {
+  const SignInState();
 
-class SignInInitial extends SignInState {}
+  @override
+  List<Object?> get props => [];
+}
 
-class SignInLoading extends SignInState {}
+class SignInInitial extends SignInState {
+  const SignInInitial();
+}
+
+class SignInLoading extends SignInState {
+  const SignInLoading();
+}
 
 class SignInSuccess extends SignInState {
   final UserEntity user;
-  SignInSuccess(this.user);
+  const SignInSuccess(this.user);
+
+  @override
+  List<Object?> get props => [user];
 }
 
 class SignInFailure extends SignInState {
   final String message;
-  SignInFailure(this.message);
+  const SignInFailure(this.message);
+
+  @override
+  List<Object?> get props => [message];
 }
