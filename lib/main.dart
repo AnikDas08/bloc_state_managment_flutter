@@ -7,10 +7,10 @@ import 'core/di/service_locator.dart' as di;
 void main() async {
   // Ensure Flutter bindings are initialized before DI
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize Dependency Injection
   await di.init();
-  
+
   runApp(const MyApp());
 }
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             useMaterial3: true,
           ),
-          initialRoute: AppRoutes.signInCubit,
+          initialRoute: AppRoutes.signIn,
           onGenerateRoute: RouteGenerator.generateRoute,
         );
       },

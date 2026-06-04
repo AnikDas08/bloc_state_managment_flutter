@@ -4,6 +4,7 @@ import '../../features/auth/presentation/sign_in/screen/signin_screen.dart';
 import '../../features/auth/presentation/sign_in_cubit/screen/signin_cubit_screen.dart';
 import '../../features/auth/presentation/sign_up/screen/signup_screen.dart';
 import '../../features/auth/presentation/sign_up_cubit/screen/signup_cubit_screen.dart';
+import '../../features/home/presentation/screen/home_screen.dart';
 import 'app_routes.dart';
 
 class RouteGenerator {
@@ -19,9 +20,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SignUpCubitScreen());
       case AppRoutes.completeProfile:
         return MaterialPageRoute(builder: (_) => const CompleteProfileScreen());
-      // Add other routes here as you implement them
-      // case AppRoutes.home:
-      //   return MaterialPageRoute(builder: (_) => const HomePage());
+      case AppRoutes.home:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       default:
         return _errorRoute();
     }

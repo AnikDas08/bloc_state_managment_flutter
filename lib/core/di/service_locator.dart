@@ -9,6 +9,7 @@ import '../../features/auth/presentation/sign_up_cubit/cubit/signup_cubit.dart';
 import '../../features/auth/presentation/compl_profile/bloc/complete_profile_bloc.dart';
 import '../../features/counter/data/counter_repository.dart';
 import '../../features/counter/bloc/counter_bloc.dart';
+import '../../features/home/bloc/home_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -29,4 +30,5 @@ Future<void> init() async {
   sl.registerFactory(() => SignUpBloc(authRepository: sl()));
   sl.registerFactory(() => SignUpCubit(authRepository: sl()));
   sl.registerFactory(() => CompleteProfileBloc(authRepository: sl()));
+  sl.registerFactory(() => HomeBloc());
 }
