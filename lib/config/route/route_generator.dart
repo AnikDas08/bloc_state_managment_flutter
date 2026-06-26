@@ -4,7 +4,9 @@ import '../../features/auth/presentation/sign_in/screen/signin_screen.dart';
 import '../../features/auth/presentation/sign_in_cubit/screen/signin_cubit_screen.dart';
 import '../../features/auth/presentation/sign_up/screen/signup_screen.dart';
 import '../../features/auth/presentation/sign_up_cubit/screen/signup_cubit_screen.dart';
-import '../../features/home/presentation/screen/home_screen.dart';
+import '../../features/home/presentation/home_screen/screen/home_screen.dart';
+import '../../features/home/presentation/receipt_details/screen/receipt_details_screen.dart';
+import '../../features/home/domain/entity/receipt_entity.dart';
 import 'app_routes.dart';
 
 class RouteGenerator {
@@ -22,6 +24,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const CompleteProfileScreen());
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case AppRoutes.receiptDetails:
+        final receipt = settings.arguments as ReceiptEntity;
+        return MaterialPageRoute(
+          builder: (_) => ReceiptDetailsScreen(receipt: receipt),
+        );
       default:
         return _errorRoute();
     }

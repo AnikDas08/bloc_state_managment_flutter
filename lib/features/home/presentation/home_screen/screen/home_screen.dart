@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../../utils/extensions/extension.dart';
-import '../../bloc/home_bloc.dart';
-import '../../domain/entity/coupon_entity.dart';
+import '../../../../../../utils/extensions/extension.dart';
+import '../../../../../../core/di/service_locator.dart';
+import '../../../domain/entity/coupon_entity.dart';
+import '../../receipt_details/widgets/receipt_item_widget.dart';
+import '../bloc/home_bloc.dart';
+import '../widgets/coupon_card_widget.dart';
 import '../widgets/home_header_widget.dart';
 import '../widgets/total_managed_card_widget.dart';
-import '../widgets/coupon_card_widget.dart';
-import '../widgets/receipt_item_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,7 +17,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HomeBloc()..add(HomeLoadDashboard()),
+      create: (_) => sl<HomeBloc>()..add(HomeLoadDashboard()),
       child: const _HomeView(),
     );
   }
@@ -54,15 +55,21 @@ class _HomeView extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       slivers: [
         // ── Blue Header ──────────────────────────────────────────────────
-        SliverToBoxAdapter(child: HomeHeaderWidget(state: state)),
+        SliverToBoxAdapter(
+            child: Column(
+              children: [
+                HomeHeaderWidget(state: state),
+              ],
+            )
+        ),
 
-        // ── Total Managed Card (overlaps the header) ──────────────────────
         SliverToBoxAdapter(
           child: Transform.translate(
-            offset: Offset(0, 0.h),
+            offset: Offset(0, -0.h),
             child: TotalManagedCardWidget(state: state),
           ),
         ),
+
 
         // ── Curated Coupons section Sheader ────────────────────────────────
         SliverToBoxAdapter(
@@ -75,7 +82,7 @@ class _HomeView extends StatelessWidget {
         // ── Coupons horizontal list ───────────────────────────────────────
         SliverToBoxAdapter(
           child: Transform.translate(
-            offset: Offset(0, -12.h),
+            offset: Offset(0, -0.h),
             child: _buildCouponsRow(state.coupons),
           ),
         ),

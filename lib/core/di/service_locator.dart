@@ -7,9 +7,8 @@ import '../../features/auth/presentation/sign_in_cubit/cubit/signin_cubit.dart';
 import '../../features/auth/presentation/sign_up/bloc/signup_bloc.dart';
 import '../../features/auth/presentation/sign_up_cubit/cubit/signup_cubit.dart';
 import '../../features/auth/presentation/compl_profile/bloc/complete_profile_bloc.dart';
-import '../../features/counter/data/counter_repository.dart';
-import '../../features/counter/bloc/counter_bloc.dart';
-import '../../features/home/bloc/home_bloc.dart';
+import '../../features/home/presentation/home_screen/bloc/home_bloc.dart';
+import '../../features/home/presentation/receipt_details/cubit/receipt_details_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -18,17 +17,16 @@ Future<void> init() async {
   sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSource());
 
   // Repositories
-  sl.registerLazySingleton<CounterRepository>(() => CounterRepository());
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(remoteDataSource: sl()),
   );
 
   // Blocs
-  sl.registerFactory(() => CounterBloc(repository: sl()));
   sl.registerFactory(() => SignInBloc(authRepository: sl()));
   sl.registerFactory(() => SignInCubit(authRepository: sl()));
   sl.registerFactory(() => SignUpBloc(authRepository: sl()));
   sl.registerFactory(() => SignUpCubit(authRepository: sl()));
   sl.registerFactory(() => CompleteProfileBloc(authRepository: sl()));
   sl.registerFactory(() => HomeBloc());
+  sl.registerFactory(() => ReceiptDetailsCubit());
 }

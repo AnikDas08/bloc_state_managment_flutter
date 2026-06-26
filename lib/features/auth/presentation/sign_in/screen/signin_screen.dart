@@ -7,6 +7,8 @@ import '../../../../../utils/helpers/validation.dart';
 import '../../../../../utils/constants/app_string.dart';
 import '../../../../../config/route/app_routes.dart';
 import '../../../../../core/di/service_locator.dart';
+import '../../../../../component/text/common_text.dart';
+import '../../../../../component/text_field/common_text_field.dart';
 import '../bloc/signin_bloc.dart';
 import '../widgets/do_not_account.dart';
 
@@ -21,8 +23,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController emailController;
   late TextEditingController passwordController;
-  bool _rememberMe = false;
-  bool _obscurePassword = true;
+  final ValueNotifier<bool> _rememberMe = ValueNotifier<bool>(false);
 
   @override
   void initState() {
@@ -35,6 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    _rememberMe.dispose();
     super.dispose();
   }
 
@@ -90,35 +92,27 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ),
                           child: Center(
-                            child: Text(
-                              'R',
-                              style: GoogleFonts.plusJakartaSans(
-                                color: Colors.white,
-                                fontSize: 32.sp,
-                                fontWeight: FontWeight.w800,
-                              ),
+                            child: CommonText(
+                              text: 'R',
+                              fontSize: 32,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
                             ),
                           ),
                         ),
                         8.height,
-                        Text(
-                          'RIZIPT',
-                          style: GoogleFonts.plusJakartaSans(
-                            color: Colors.white,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: 3,
-                          ),
+                        CommonText(
+                          text: 'RIZIPT',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
                         ),
                         4.height,
-                        Text(
-                          'TRANSACTION BY RIZIPT',
-                          style: GoogleFonts.plusJakartaSans(
-                            color: Colors.white.withOpacity(0.75),
-                            fontSize: 9.sp,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 1.5,
-                          ),
+                        CommonText(
+                          text: 'TRANSACTION BY RIZIPT',
+                          fontSize: 9,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white.withOpacity(0.75),
                         ),
                         20.height,
                         // Title row
@@ -127,13 +121,11 @@ class _SignInScreenState extends State<SignInScreen> {
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           textBaseline: TextBaseline.alphabetic,
                           children: [
-                            Text(
-                              'Sign In',
-                              style: GoogleFonts.plusJakartaSans(
-                                color: Colors.white,
-                                fontSize: 26.sp,
-                                fontWeight: FontWeight.w700,
-                              ),
+                            CommonText(
+                              text: 'Sign In',
+                              fontSize: 26,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
                             ),
                             8.width,
                             Container(
@@ -145,34 +137,28 @@ class _SignInScreenState extends State<SignInScreen> {
                                 color: Colors.white.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(6.r),
                               ),
-                              child: Text(
-                                'as',
-                                style: GoogleFonts.plusJakartaSans(
-                                  color: Colors.white70,
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                              child: CommonText(
+                                text: 'as',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white70,
                               ),
                             ),
                             8.width,
-                            Text(
-                              'Merchant',
-                              style: GoogleFonts.plusJakartaSans(
-                                color: Colors.white,
-                                fontSize: 26.sp,
-                                fontWeight: FontWeight.w700,
-                              ),
+                            CommonText(
+                              text: 'Merchant',
+                              fontSize: 26,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
                             ),
                           ],
                         ),
                         8.height,
-                        Text(
-                          'Please Sign in to Continue Our App',
-                          style: GoogleFonts.plusJakartaSans(
-                            color: Colors.white.withOpacity(0.85),
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
+                        CommonText(
+                          text: 'Please Sign in to Continue Our App',
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white.withOpacity(0.85),
                         ),
                       ],
                     ),
@@ -215,77 +201,93 @@ class _SignInScreenState extends State<SignInScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 // Email label
-                                Text(
-                                  AppString.email,
-                                  style: GoogleFonts.plusJakartaSans(
-                                    color: const Color(0xFF1A1A2E),
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                CommonText(
+                                  text: AppString.email,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFF1A1A2E),
                                 ),
                                 8.height,
                                 // Email field
-                                _buildInputField(
+                                CommonTextField(
                                   controller: emailController,
                                   hintText: 'your.email@example.com',
-                                  prefixIcon: Icons.mail_outline_rounded,
+                                  prefixIcon: const Icon(
+                                    Icons.mail_outline_rounded,
+                                    size: 18,
+                                    color: Color(0xFF979797),
+                                  ),
                                   validator: AppValidation.email,
                                   keyboardType: TextInputType.emailAddress,
+                                  fillColor: const Color(0xFFF0F4F8),
+                                  borderRadius: 12,
                                 ),
                                 20.height,
                                 // Password label
-                                Text(
-                                  AppString.password,
-                                  style: GoogleFonts.plusJakartaSans(
-                                    color: const Color(0xFF1A1A2E),
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                CommonText(
+                                  text: AppString.password,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFF1A1A2E),
                                 ),
                                 8.height,
                                 // Password field
-                                _buildPasswordField(),
+                                CommonTextField(
+                                  controller: passwordController,
+                                  hintText: AppString.password,
+                                  isPassword: true,
+                                  prefixIcon: const Icon(
+                                    Icons.lock_outline_rounded,
+                                    size: 18,
+                                    color: Color(0xFF979797),
+                                  ),
+                                  validator: AppValidation.password,
+                                  fillColor: const Color(0xFFF0F4F8),
+                                  borderRadius: 12,
+                                  textColor: const Color(0xFF1A1A2E),
+                                ),
                                 16.height,
                                 // Remember me + Forgot password row
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 20.w,
-                                          height: 20.w,
-                                          child: Checkbox(
-                                            value: _rememberMe,
-                                            activeColor: const Color(
-                                              0xFF2196F3,
+                                    ValueListenableBuilder<bool>(
+                                      valueListenable: _rememberMe,
+                                      builder: (context, rememberMeValue, child) {
+                                        return Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 20.w,
+                                              height: 20.w,
+                                              child: Checkbox(
+                                                value: rememberMeValue,
+                                                activeColor: const Color(
+                                                  0xFF2196F3,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(4.r),
+                                                ),
+                                                side: BorderSide(
+                                                  color: const Color(0xFF2196F3),
+                                                  width: 1.5.w,
+                                                ),
+                                                onChanged: (val) {
+                                                  _rememberMe.value = val ?? false;
+                                                },
+                                              ),
                                             ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(4.r),
+                                            8.width,
+                                            CommonText(
+                                              text: 'Remember me',
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500,
+                                              color: const Color(0xFF454545),
                                             ),
-                                            side: BorderSide(
-                                              color: const Color(0xFF2196F3),
-                                              width: 1.5.w,
-                                            ),
-                                            onChanged: (val) {
-                                              setState(() {
-                                                _rememberMe = val ?? false;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                        8.width,
-                                        Text(
-                                          'Remember me',
-                                          style: GoogleFonts.plusJakartaSans(
-                                            color: const Color(0xFF454545),
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
+                                          ],
+                                        );
+                                      },
                                     ),
                                     GestureDetector(
                                       onTap: () {
@@ -294,17 +296,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                           AppRoutes.forgotPassword,
                                         );
                                       },
-                                      child: Text(
-                                        'Forgot Password?',
-                                        style: GoogleFonts.plusJakartaSans(
-                                          color: const Color(0xFF2196F3),
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w600,
-                                          decoration: TextDecoration.underline,
-                                          decorationColor: const Color(
-                                            0xFF2196F3,
-                                          ),
-                                        ),
+                                      child: CommonText(
+                                        text: 'Forgot Password?',
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color(0xFF2196F3),
                                       ),
                                     ),
                                   ],
@@ -382,13 +378,11 @@ class _SignInScreenState extends State<SignInScreen> {
                                           strokeWidth: 2.5,
                                         ),
                                       )
-                                    : Text(
-                                        'Sign In',
-                                        style: GoogleFonts.plusJakartaSans(
-                                          color: Colors.white,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                    : CommonText(
+                                        text: 'Sign In',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white,
                                       ),
                               ),
                             ),
@@ -405,120 +399,6 @@ class _SignInScreenState extends State<SignInScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildInputField({
-    required TextEditingController controller,
-    required String hintText,
-    required IconData prefixIcon,
-    FormFieldValidator<String>? validator,
-    TextInputType keyboardType = TextInputType.text,
-  }) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      autovalidateMode: AutovalidateMode.onUnfocus,
-      validator: validator,
-      style: GoogleFonts.plusJakartaSans(
-        fontSize: 14.sp,
-        color: const Color(0xFF1A1A2E),
-      ),
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: GoogleFonts.plusJakartaSans(
-          fontSize: 13.sp,
-          color: const Color(0xFF979797),
-        ),
-        prefixIcon: Icon(
-          prefixIcon,
-          size: 18.sp,
-          color: const Color(0xFF979797),
-        ),
-        filled: true,
-        fillColor: const Color(0xFFF0F4F8),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: const BorderSide(color: Color(0xFF2196F3), width: 1.5),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: const BorderSide(color: Colors.red, width: 1.5),
-        ),
-        errorMaxLines: 2,
-      ),
-    );
-  }
-
-  Widget _buildPasswordField() {
-    return TextFormField(
-      controller: passwordController,
-      obscureText: _obscurePassword,
-      autovalidateMode: AutovalidateMode.onUnfocus,
-      validator: AppValidation.password,
-      style: GoogleFonts.plusJakartaSans(
-        fontSize: 14.sp,
-        color: const Color(0xFF1A1A2E),
-      ),
-      decoration: InputDecoration(
-        hintText: AppString.password,
-        hintStyle: GoogleFonts.plusJakartaSans(
-          fontSize: 13.sp,
-          color: const Color(0xFF979797),
-        ),
-        prefixIcon: Icon(
-          Icons.lock_outline_rounded,
-          size: 18.sp,
-          color: const Color(0xFF979797),
-        ),
-        suffixIcon: GestureDetector(
-          onTap: () => setState(() => _obscurePassword = !_obscurePassword),
-          child: Icon(
-            _obscurePassword
-                ? Icons.visibility_outlined
-                : Icons.visibility_off_outlined,
-            size: 18.sp,
-            color: const Color(0xFF979797),
-          ),
-        ),
-        filled: true,
-        fillColor: const Color(0xFFF0F4F8),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: const BorderSide(color: Color(0xFF2196F3), width: 1.5),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
-          borderSide: const BorderSide(color: Colors.red, width: 1.5),
-        ),
-        errorMaxLines: 2,
       ),
     );
   }

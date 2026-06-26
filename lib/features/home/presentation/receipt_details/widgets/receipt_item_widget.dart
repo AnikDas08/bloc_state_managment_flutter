@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../../utils/extensions/extension.dart';
-import '../../domain/entity/receipt_entity.dart';
+import '../../../../../../utils/extensions/extension.dart';
+import '../../../../../config/route/app_routes.dart';
+import '../../../domain/entity/receipt_entity.dart';
 
 class ReceiptItemWidget extends StatelessWidget {
   final ReceiptEntity receipt;
@@ -10,8 +11,16 @@ class ReceiptItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          AppRoutes.receiptDetails,
+          arguments: receipt,
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -142,6 +151,7 @@ class ReceiptItemWidget extends StatelessWidget {
           ),
         ],
       ),
+    )
     );
   }
 }
