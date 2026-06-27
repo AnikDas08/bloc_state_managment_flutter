@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../../../utils/extensions/extension.dart';
+import '../../../../../component/text/common_text.dart';
 import '../bloc/home_bloc.dart';
 
 class HomeHeaderWidget extends StatelessWidget {
@@ -43,21 +43,19 @@ class HomeHeaderWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Welcome back,',
-                      style: GoogleFonts.plusJakartaSans(
-                        color: Colors.white.withOpacity(0.85),
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    CommonText(
+                      text: 'Welcome back,',
+                      color: Colors.white.withOpacity(0.85),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      textAlign: TextAlign.start,
                     ),
-                    Text(
-                      state.userName,
-                      style: GoogleFonts.plusJakartaSans(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    CommonText(
+                      text: state.dashboard.userName,
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      textAlign: TextAlign.start,
                     ),
                   ],
                 ),

@@ -103,11 +103,16 @@ class _CommonTextFieldState extends State<CommonTextField> {
         errorMaxLines: 2,
         isDense: widget.isDense,
         filled: true,
-        prefixIconConstraints: const BoxConstraints(
-          maxWidth: 30,
-          maxHeight: 30,
+        prefixIconConstraints: BoxConstraints(
+          maxWidth: 45.w,
+          maxHeight: 30.h,
         ),
-        prefixIcon: widget.prefixIcon,
+        prefixIcon: widget.prefixIcon != null
+            ? Padding(
+                padding: EdgeInsets.only(left: 12.w, right: 8.w),
+                child: widget.prefixIcon,
+              )
+            : null,
         fillColor: widget.fillColor,
         counterText: '',
         contentPadding: EdgeInsets.symmetric(

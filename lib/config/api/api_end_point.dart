@@ -17,4 +17,5 @@ class ApiEndPoint {
   static const chats = 'chats';
   static const completeProfile = 'user/completeProfiles';
   static const messages = 'messages';
+  static const dashboard = 'dashboard';
 }

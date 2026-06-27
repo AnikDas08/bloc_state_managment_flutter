@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../../../utils/extensions/extension.dart';
+import '../../../../../component/text/common_text.dart';
 import '../bloc/home_bloc.dart';
 
 class TotalManagedCardWidget extends StatelessWidget {
@@ -28,22 +28,20 @@ class TotalManagedCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Total Managed',
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF2196F3),
-              ),
+            CommonText(
+              text: 'Total Managed',
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+              color: const Color(0xFF2196F3),
+              textAlign: TextAlign.start,
             ),
             6.h.height,
-            Text(
-              state.totalManaged,
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 28.sp,
-                fontWeight: FontWeight.w800,
-                color: const Color(0xFF1A1A2E),
-              ),
+            CommonText(
+              text: state.dashboard.totalManaged,
+              fontSize: 28,
+              fontWeight: FontWeight.w800,
+              color: const Color(0xFF1A1A2E),
+              textAlign: TextAlign.start,
             ),
             12.h.height,
             Row(
@@ -80,13 +78,11 @@ class TotalManagedCardWidget extends StatelessWidget {
                   ),
                 ),
                 8.w.width,
-                Text(
-                  '+12 receipts this week',
-                  style: GoogleFonts.plusJakartaSans(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFF979797),
-                  ),
+                CommonText(
+                  text: '+12 receipts this week',
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: const Color(0xFF979797),
                 ),
               ],
             ),

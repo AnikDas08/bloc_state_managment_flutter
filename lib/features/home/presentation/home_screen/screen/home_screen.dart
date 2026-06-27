@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../utils/extensions/extension.dart';
 import '../../../../../../core/di/service_locator.dart';
+import '../../../../../../component/text/common_text.dart';
 import '../../../domain/entity/coupon_entity.dart';
 import '../../receipt_details/widgets/receipt_item_widget.dart';
 import '../bloc/home_bloc.dart';
@@ -39,7 +40,7 @@ class _HomeView extends StatelessWidget {
             );
           }
           if (state is HomeError) {
-            return Center(child: Text(state.message));
+            return Center(child: CommonText(text: state.message));
           }
           if (state is HomeLoaded) {
             return _buildBody(context, state);
@@ -83,27 +84,22 @@ class _HomeView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Transform.translate(
             offset: Offset(0, -0.h),
-            child: _buildCouponsRow(state.coupons),
+            child: _buildCouponsRow(state.dashboard.coupons),
           ),
         ),
 
         // ── Recent Archives header ────────────────────────────────────────
         SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.only(
-              left: 20.w,
-              right: 20.w,
-              top: 8.h,
-              bottom: 12.h,
-            ),
-            child: Text(
-              'Recent Archives',
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFF1A1A2E),
-              ),
-            ),
+          child: CommonText(
+            text: 'Recent Archives',
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFF1A1A2E),
+            left: 20,
+            right: 20,
+            top: 8,
+            bottom: 12,
+            textAlign: TextAlign.start,
           ),
         ),
 
@@ -111,8 +107,8 @@ class _HomeView extends StatelessWidget {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) =>
-                ReceiptItemWidget(receipt: state.recentArchives[index]),
-            childCount: state.recentArchives.length,
+                ReceiptItemWidget(receipt: state.dashboard.recentArchives[index]),
+            childCount: state.dashboard.recentArchives.length,
           ),
         ),
 
@@ -128,23 +124,19 @@ class _HomeView extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: GoogleFonts.plusJakartaSans(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFF1A1A2E),
-            ),
+          CommonText(
+            text: title,
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFF1A1A2E),
           ),
           Row(
             children: [
-              Text(
-                actionLabel,
-                style: GoogleFonts.plusJakartaSans(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xFF2196F3),
-                ),
+              CommonText(
+                text: actionLabel,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF2196F3),
               ),
               Icon(
                 Icons.chevron_right_rounded,
