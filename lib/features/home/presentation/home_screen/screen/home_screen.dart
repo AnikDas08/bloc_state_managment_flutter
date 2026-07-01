@@ -11,6 +11,9 @@ import '../bloc/home_bloc.dart';
 import '../widgets/coupon_card_widget.dart';
 import '../widgets/home_header_widget.dart';
 import '../widgets/total_managed_card_widget.dart';
+import '../../../../notification/presentation/bloc/notification_bloc.dart';
+import '../../../../notification/presentation/bloc/notification_state.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -29,24 +32,72 @@ class _HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF2F5FA),
-      floatingActionButton: _buildFAB(),
-      body: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          if (state is HomeLoading || state is HomeInitial) {
-            return const Center(
-              child: CircularProgressIndicator(color: Color(0xFF2196F3)),
+    return BlocListener<NotificationBloc, NotificationState>(
+      listenWhen: (previous, current) {
+        if (previous is NotificationActive && current is NotificationActive) {
+          return previous.lastReceivedMessage != current.lastReceivedMessage ||
+              previous.lastClickedMessage != current.lastClickedMessage;
+        }
+        return current is NotificationActive;
+      },
+      listener: (context, state) {
+        if (state is NotificationActive) {
+          if (state.lastReceivedMessage != null) {
+            final notification = state.lastReceivedMessage!.notification;
+            if (notification != null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Notification Received: ${notification.title}\n${notification.body}',
+                  ),
+                  backgroundColor: const Color(0xFF2196F3),
+                  behavior: SnackBarBehavior.floating,
+                  duration: const Duration(seconds: 4),
+                ),
+              );
+            }
+          }
+
+          if (state.lastClickedMessage != null) {
+            final notification = state.lastClickedMessage!.notification;
+            final title = notification?.title ?? 'Notification Clicked';
+            final body = notification?.body ?? 'Payload: ${state.lastClickedMessage!.data}';
+
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(title),
+                content: Text(body),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
             );
           }
-          if (state is HomeError) {
-            return Center(child: CommonText(text: state.message));
-          }
-          if (state is HomeLoaded) {
-            return _buildBody(context, state);
-          }
-          return const SizedBox.shrink();
-        },
+        }
+      },
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF2F5FA),
+        floatingActionButton: _buildFAB(),
+        body: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            if (state is HomeLoading || state is HomeInitial) {
+              return const Center(
+                child: CircularProgressIndicator(color: Color(0xFF2196F3)),
+              );
+            }
+            if (state is HomeError) {
+              return Center(child: CommonText(text: state.message));
+            }
+            if (state is HomeLoaded) {
+              return _buildBody(context, state);
+            }
+            return const SizedBox.shrink();
+          },
+        ),
       ),
     );
   }

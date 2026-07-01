@@ -13,6 +13,9 @@ import '../../features/home/domain/repository/home_repository.dart';
 import '../../features/home/domain/usecase/get_dashboard_usecase.dart';
 import '../../features/home/presentation/home_screen/bloc/home_bloc.dart';
 import '../../features/home/presentation/receipt_details/cubit/receipt_details_cubit.dart';
+import '../services/notification/notification_service.dart';
+import '../../features/notification/presentation/bloc/notification_bloc.dart';
+
 
 final sl = GetIt.instance;
 
@@ -22,6 +25,8 @@ Future<void> init() async {
   sl.registerLazySingleton<HomeRemoteDataSource>(
     () => MockHomeRemoteDataSourceImpl(), // এখানে Mock সোর্সটি দিন
   );
+  sl.registerLazySingleton<NotificationService>(() => NotificationService());
+
 
   // Repositories
   sl.registerLazySingleton<AuthRepository>(
@@ -42,4 +47,5 @@ Future<void> init() async {
   sl.registerFactory(() => CompleteProfileBloc(authRepository: sl()));
   sl.registerFactory(() => HomeBloc(getDashboardUseCase: sl()));
   sl.registerFactory(() => ReceiptDetailsCubit());
+  sl.registerFactory(() => NotificationBloc(notificationService: sl()));
 }
