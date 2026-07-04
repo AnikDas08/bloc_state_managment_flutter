@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "998998874499",
+    "project_id": "fir-recycleview-3ea5f",
+    "storage_bucket": "fir-recycleview-3ea5f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998998874499:android:225972348611ac45217eb6",
+        "android_client_info": {
+          "package_name": "com.example.bloc_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpOO2WfGJwOPE1aiMS3wrNvXCJGFrrYWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

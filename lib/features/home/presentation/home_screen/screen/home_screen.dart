@@ -114,15 +114,12 @@ class _HomeView extends StatelessWidget {
               ],
             )
         ),
-
         SliverToBoxAdapter(
           child: Transform.translate(
             offset: Offset(0, -0.h),
             child: TotalManagedCardWidget(state: state),
           ),
         ),
-
-
         // ── Curated Coupons section Sheader ────────────────────────────────
         SliverToBoxAdapter(
           child: Transform.translate(
@@ -130,7 +127,6 @@ class _HomeView extends StatelessWidget {
             child: _buildSectionHeader('Curated Coupons', 'View All'),
           ),
         ),
-
         // ── Coupons horizontal list ───────────────────────────────────────
         SliverToBoxAdapter(
           child: Transform.translate(
