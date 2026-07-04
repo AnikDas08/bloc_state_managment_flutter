@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 abstract class HomeRemoteDataSource {
   Future<DashboardModel> getDashboardData();
 }
-
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   @override
   Future<DashboardModel> getDashboardData() async {
@@ -21,7 +20,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     }
   }
 }
-
 // ── Mock Data Source (ডিজাইন চেক করার জন্য) ──────────────────────────
 class MockHomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   @override

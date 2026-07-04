@@ -7,7 +7,6 @@ class CouponEntity extends Equatable {
   final String title;
   final String validUntil;
   final Color categoryColor;
-
   const CouponEntity({
     required this.category,
     required this.categoryIcon,
@@ -15,7 +14,12 @@ class CouponEntity extends Equatable {
     required this.validUntil,
     required this.categoryColor,
   });
-
   @override
-  List<Object?> get props => [category, title, validUntil];
+  List<Object?> get props => [
+        category,
+        categoryIcon,
+        title,
+        validUntil,
+        categoryColor,
+      ];
 }

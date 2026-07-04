@@ -8,6 +8,8 @@ class DashboardEntity extends Equatable {
   final List<CouponEntity> coupons;
   final List<ReceiptEntity> recentArchives;
 
+
+
   const DashboardEntity({
     required this.userName,
     required this.totalManaged,
