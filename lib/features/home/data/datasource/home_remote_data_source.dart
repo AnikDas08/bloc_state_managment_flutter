@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 abstract class HomeRemoteDataSource {
   Future<DashboardModel> getDashboardData();
 }
+
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   @override
   Future<DashboardModel> getDashboardData() async {
@@ -20,12 +21,13 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     }
   }
 }
-// ── Mock Data Source (ডিজাইন চেক করার জন্য) ──────────────────────────
+
+// ── Mock Data Source (for UI and local testing) ──────────────────────────
 class MockHomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   @override
   Future<DashboardModel> getDashboardData() async {
-    // এপিআই কলের বদলে এখানে আপনার স্ট্যাটিক ডাটা দিন
-    await Future.delayed(const Duration(milliseconds: 500)); // সামান্য ডিলে
+    // Simulated network latency
+    await Future.delayed(const Duration(milliseconds: 500));
     
     return const DashboardModel(
       userName: 'Alex',

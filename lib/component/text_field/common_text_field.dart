@@ -66,13 +66,13 @@ class CommonTextField extends StatefulWidget {
 }
 
 class _CommonTextFieldState extends State<CommonTextField> {
-  // গেটএক্স .obs এর পরিবর্তে পিউর ডার্টের সাধারণ bool ভ্যারিয়েবল
+  // Boolean variable to toggle password obscure state
   late bool _obscureText;
 
   @override
   void initState() {
     super.initState();
-    // পাসওয়ার্ড ফিল্ড হলে শুরুতে লেখাগুলো হাইড (true) থাকবে
+    // Initially hide password text if it is a password field
     _obscureText = widget.isPassword;
   }
 
@@ -88,7 +88,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
       autovalidateMode: AutovalidateMode.onUnfocus,
       keyboardType: widget.keyboardType,
       controller: widget.controller,
-      // পাসওয়ার্ড ফিল্ড হলে আমাদের লোকাল স্টেটের ভ্যালু নেবে
+      // Use local obscure state for password fields
       obscureText: widget.isPassword ? _obscureText : false,
       textInputAction: widget.textInputAction,
       maxLength: widget.mexLength,
@@ -131,7 +131,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         prefix: widget.prefixText != null
             ? CommonText(text: widget.prefixText!, fontWeight: FontWeight.w400)
             : null,
-        // পাসওয়ার্ড ফিল্ড হলে কাস্টম চোখ আইকন দেখাবে, নাহলে বাইরের দেওয়া সাফিক্স আইকন দেখাবে
+        // Show visibility toggle icon for password field, otherwise show custom suffix icon
         suffixIcon: widget.isPassword ? _buildPasswordSuffixIcon() : widget.suffixIcon,
       ),
     );

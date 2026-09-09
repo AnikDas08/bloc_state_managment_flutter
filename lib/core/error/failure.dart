@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-/// সমস্ত এরর বা ফেইলিউরের মাদার ক্লাস (Base Class)
+/// Base class for all failures and errors
 abstract class Failure extends Equatable {
   final String message;
 
@@ -10,22 +10,22 @@ abstract class Failure extends Equatable {
   List<Object?> get props => [message];
 }
 
-/// ১. সার্ভার বা এপিআই সংক্রান্ত এরর হ্যান্ডেল করার জন্য (যেমন: 400, 404, 500)
+/// Handled server or API related errors (e.g., 400, 404, 500)
 class ServerFailure extends Failure {
   const ServerFailure(super.message);
 }
 
-/// ২. ইন্টারনেট কানেকশন না থাকলে বা নেটওয়ার্ক টাইম-আউট হলে
+/// Network connectivity or timeout failure
 class NetworkFailure extends Failure {
-  const NetworkFailure([super.message = "ইন্টারনেট কানেকশন নেই! অনুগ্রহ করে আবার চেষ্টা করুন।"]);
+  const NetworkFailure([super.message = "No internet connection. Please try again."]);
 }
 
-/// ৩. লোকাল ডাটাবেজ (যেমন: SharedPreferences, Hive, SQLite) থেকে ডাটা রিড/রাইট করতে সমস্যা হলে
+/// Cache or local storage error (e.g., SharedPreferences, Hive, SQLite)
 class CacheFailure extends Failure {
   const CacheFailure(super.message);
 }
 
-/// ৪. ইউজার যদি ফর্ম ভ্যালিডেশন বা ইনপুট দিতে ভুল করে (Custom UI Validation)
+/// Form or UI input validation error
 class ValidationFailure extends Failure {
   const ValidationFailure(super.message);
 }
