@@ -15,7 +15,7 @@ class SignInCubit extends Cubit<SignInCubitState> {
     required String role,
   }) async {
     emit(SignInCubitLoading());
-
+//final submistion of it
     final result = await _authRepository.signIn(
       email: email,
       password: password,
