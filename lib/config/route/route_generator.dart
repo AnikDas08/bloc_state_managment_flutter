@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../features/auth/presentation/compl_profile/screen/complete_profile_screen.dart';
-import '../../features/auth/presentation/sign_in/screen/signin_screen.dart';
-import '../../features/auth/presentation/sign_in_cubit/screen/signin_cubit_screen.dart';
-import '../../features/auth/presentation/sign_up/screen/signup_screen.dart';
-import '../../features/auth/presentation/sign_up_cubit/screen/signup_cubit_screen.dart';
-import '../../features/home/presentation/home_screen/screen/home_screen.dart';
-import '../../features/home/presentation/receipt_details/screen/receipt_details_screen.dart';
-import '../../features/home/domain/entity/receipt_entity.dart';
+import '../../features/common/auth/presentation/compl_profile/screen/complete_profile_screen.dart';
+import '../../features/common/auth/presentation/sign_in/screen/signin_screen.dart';
+import '../../features/common/auth/presentation/sign_in_cubit/screen/signin_cubit_screen.dart';
+import '../../features/common/auth/presentation/sign_up/screen/signup_screen.dart';
+import '../../features/common/auth/presentation/sign_up_cubit/screen/signup_cubit_screen.dart';
+import '../../features/common/notification/presentation/screen/notification_screen.dart';
+import '../../features/role/user/home/domain/entity/receipt_entity.dart';
+import '../../features/role/user/home/presentation/home_screen/screen/home_screen.dart';
+import '../../features/role/user/home/presentation/receipt_details/screen/receipt_details_screen.dart';
 import 'app_routes.dart';
 
 class RouteGenerator {
@@ -24,6 +25,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const CompleteProfileScreen());
       case AppRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+      case AppRoutes.notification:
+        return MaterialPageRoute(builder: (_) => const NotificationScreen());
       case AppRoutes.receiptDetails:
         final receipt = settings.arguments as ReceiptEntity;
         return MaterialPageRoute(

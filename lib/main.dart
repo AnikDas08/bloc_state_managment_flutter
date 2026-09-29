@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'features/common/notification/presentation/bloc/notification_bloc.dart';
+import 'features/common/notification/presentation/bloc/notification_event.dart';
 import 'firebase_options.dart';
 import 'config/route/app_routes.dart';
 import 'config/route/route_generator.dart';
 import 'core/di/service_locator.dart' as di;
-import 'features/notification/presentation/bloc/notification_bloc.dart';
-import 'features/notification/presentation/bloc/notification_event.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
